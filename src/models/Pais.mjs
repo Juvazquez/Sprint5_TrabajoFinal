@@ -1,0 +1,73 @@
+import mongoose from 'mongoose';
+
+const paisSchema = new mongoose.Schema({
+    nombreComun: { 
+        type: String, 
+        required: [true, "El nombre común del país es obligatorio"], 
+        trim: true,
+        minlength: [2, "El nombre común del país debe tener al menos 2 caracteres"],
+        maxlength: [100, "El nombre común del país no puede tener más de 100 caracteres"]
+    },
+    nombreOficial: { 
+        type: String, 
+        required: [true, "El nombre oficial del país es obligatorio"], 
+        trim: true,
+        minlength: [2, "El nombre oficial del país debe tener al menos 2 caracteres"],
+        maxlength: [150, "El nombre oficial del país no puede tener más de 150 caracteres"]
+    },
+    capital: { 
+        type: [String], 
+        default: ["Desconocido"]
+    },
+    region: { 
+        type: String, 
+        required: [true, "La región es obligatoria"], 
+        trim: true
+    },
+    area: { 
+        type: Number, 
+        min: [0, "El área no puede ser negativa"] 
+    },
+    poblacion: { 
+        type: Number, 
+        min: [0, "La población no puede ser negativa"] 
+    },
+    idiomas: {
+        type: Object, 
+        required: [true, "Los idiomas son obligatorios"]
+    },
+    banderas: {
+        type: Object,
+        required: [true, "La información de las banderas es obligatoria"]
+    },
+    mapas: {
+        type: Object,
+        default: {}
+    },
+    fronteras: {
+        type: [String],
+        default: []
+    },
+    gini: {
+        type: Number,
+        min: [0, "El índice Gini no puede ser negativo"],
+        max: [100, "El índice Gini no puede ser mayor a 100"]
+    },
+    timezones: {
+        type: [String],
+        default: ["Desconocido"]
+    },
+    creador: {
+        type: String,
+        required: [true, "El nombre del creador es obligatorio"],
+        trim: true
+    },
+    createdAt: { 
+        type: Date, 
+        default: Date.now 
+    }
+});
+
+const Pais = mongoose.model('Pais', paisSchema, 'Grupo-09');
+
+export default Pais;
