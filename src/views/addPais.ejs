@@ -1,68 +1,48 @@
-<!DOCTYPE html>
-<html lang="es">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Agregar Pais</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-</head>
-<body class="bg-gray-100 text-gray-900 flex justify-center items-center min-h-screen">
+<form action="/api/pais/agregar" method="POST" class="max-w-xl mx-auto p-4">
 
-    <div class="bg-white p-6 rounded-lg shadow-md w-full max-w-md">
-        <h2 class="text-2xl font-bold text-center mb-4">Agregar Pais</h2>
+  <div class="mb-4">
+    <label class="block font-medium">Nombre Oficial</label>
+    <input type="text" name="nombreOficial" required class="w-full border rounded px-3 py-2" />
+  </div>
 
-        <form action="/api/heroes/agregar" method="POST" class="space-y-4">
-            <div>
-                <label class="block text-sm font-medium text-gray-700">Nombre del Superhéroe</label>
-                <input type="text" name="nombreSuperHeroe" required class="w-full p-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500">
-            </div>
+  <div class="mb-4">
+    <label class="block font-medium">Capital</label>
+    <input type="text" name="capital" placeholder="Ej: Buenos Aires, La Plata" class="w-full border rounded px-3 py-2" />
+  </div>
 
-            <div>
-                <label class="block text-sm font-medium text-gray-700">Nombre Real</label>
-                <input type="text" name="nombreReal" required class="w-full p-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500">
-            </div>
+  <div class="mb-4">
+    <label class="block font-medium">Fronteras</label>
+    <input type="text" name="fronteras" placeholder="Ej: ARG, BRA" class="w-full border rounded px-3 py-2" />
+  </div>
 
-            <div>
-                <label class="block text-sm font-medium text-gray-700">Edad</label>
-                <input type="number" name="edad" min="1" required class="w-full p-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500">
-            </div>
+  <div class="mb-4">
+    <label class="block font-medium">Área</label>
+    <input type="number" name="area" required class="w-full border rounded px-3 py-2" />
+  </div>
 
-            <div>
-                <label class="block text-sm font-medium text-gray-700">Planeta de Origen</label>
-                <input type="text" name="planetaOrigen" required class="w-full p-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500">
-            </div>
+  <div class="mb-4">
+    <label class="block font-medium">Población</label>
+    <input type="number" name="population" required class="w-full border rounded px-3 py-2" />
+  </div>
 
-            <div>
-                <label class="block text-sm font-medium text-gray-700">Debilidad</label>
-                <input type="text" name="debilidad" required class="w-full p-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500">
-            </div>
+  <div class="mb-4">
+    <label class="block font-medium">Índice Gini</label>
+    <input type="number" name="gini" class="w-full border rounded px-3 py-2" />
+  </div>
 
-            <div id="poderes-container">
-                <label class="block text-sm font-medium text-gray-700">Poderes</label>
-                <input type="text" name="poderes[]" required placeholder="Ej: Volar" class="w-full p-2 mb-2 border border-gray-300 rounded-lg">
-            </div>
+  <div class="mb-4">
+    <label class="block font-medium">Zonas Horarias</label>
+    <input type="text" name="timezones" placeholder="UTC−03:00, UTC+01:00" class="w-full border rounded px-3 py-2" />
+  </div>
 
-            <button type="button" onclick="agregarPoder()" class="w-full bg-green-500 text-white py-2 px-4 rounded-lg hover:bg-green-600 transition">
-                + Agregar otro poder
-            </button>
+  <div class="mb-4">
+    <label class="block font-medium">Creador</label>
+    <input type="text" name="creador" required class="w-full border rounded px-3 py-2" />
+  </div>
 
-            <button type="submit" class="w-full bg-blue-500 text-white py-2 px-4 rounded-lg hover:bg-blue-600 transition">
-                Agregar Superhéroe
-            </button>
-        </form>
-    </div>
-
-    <script>
-        function agregarPoder() {
-            const contenedor = document.getElementById('poderes-container');
-            const nuevoInput = document.createElement('input');
-            nuevoInput.type = 'text';
-            nuevoInput.name = 'poderes[]';
-            nuevoInput.placeholder = 'Ej: Invisibilidad';
-            nuevoInput.className = 'w-full p-2 mb-2 border border-gray-300 rounded-lg';
-            contenedor.appendChild(nuevoInput);
-        }
-    </script>
-
-</body>
-</html>
+  <div>
+    <button type="submit" class="bg-blue-600 hover:bg-blue-700 text-white font-semibold px-4 py-2 rounded">
+      Guardar
+    </button>
+  </div>
+</form>

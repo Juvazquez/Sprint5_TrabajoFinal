@@ -41,7 +41,7 @@
                     <tr class="border-t border-gray-200 hover:bg-gray-100">
                         <td class="py-3 px-4"><%= pais.nombreOficial %></td>
                         <td class="py-3 px-4"><%= pais.capital?.join(", ") || "Desconocido" %></td>
-                        <td class="py-3 px-4"><%= pais.borders?.join(", ") || "N/A" %></td>
+                        <td class="py-3 px-4"><%= (pais.fronteras && pais.fronteras.length > 0) ? pais.fronteras.join(", ") : "N/A" %></td>
                         <td class="py-3 px-4"><%= pais.area?.toLocaleString() || "0" %></td>
                         <td class="py-3 px-4"><%= pais.poblacion?.toLocaleString() || "0" %></td>
                         <td class="py-3 px-4"><%= pais.gini || "N/A" %></td>

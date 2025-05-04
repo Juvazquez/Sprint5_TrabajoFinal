@@ -6,7 +6,9 @@ class PaisRepository extends IRepository {
         return await Pais.insertMany(paises);
     }
     async obtenerTodos() {
-        return await Pais.find({});
+        return await Pais.find({ nombreOficial: { $exists: true } });
+        //Busca en la colección solamente los documentos(paises) que tienen el campo nombreOficial.
+
     }
     async eliminarPais(id) {
         return await Pais.findByIdAndDelete(id);

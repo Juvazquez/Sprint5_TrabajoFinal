@@ -3,7 +3,7 @@ import mongoose from 'mongoose';
 const paisSchema = new mongoose.Schema({
     nombreComun: { 
         type: String, 
-        required: [true, "El nombre común del país es obligatorio"], 
+        default: "Desconocido",
         trim: true,
         minlength: [2, "El nombre común del país debe tener al menos 2 caracteres"],
         maxlength: [100, "El nombre común del país no puede tener más de 100 caracteres"]
@@ -21,7 +21,7 @@ const paisSchema = new mongoose.Schema({
     },
     region: { 
         type: String, 
-        required: [true, "La región es obligatoria"], 
+        default: "Desconocido",
         trim: true
     },
     area: { 
@@ -34,11 +34,9 @@ const paisSchema = new mongoose.Schema({
     },
     idiomas: {
         type: Object, 
-        required: [true, "Los idiomas son obligatorios"]
     },
     banderas: {
         type: Object,
-        required: [true, "La información de las banderas es obligatoria"]
     },
     mapas: {
         type: Object,

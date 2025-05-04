@@ -1,7 +1,7 @@
 import { body } from "express-validator";
 
 export const validarPais = [
-    body("name.official")
+    body("nombreOficial")
         .trim()
         .notEmpty().withMessage("El nombre oficial es obligatorio")
         .isLength({ min: 3, max: 90 }).withMessage("El nombre oficial debe tener entre 3 y 90 caracteres"),
@@ -17,9 +17,9 @@ export const validarPais = [
             return true;
         }),
 
-    body("borders")
+    body("fronteras")
         .optional() // porque no todos los países tienen fronteras
-        .isArray().withMessage("Borders debe ser un array")
+        .isArray().withMessage("Fronteras debe ser un array")
         .custom((borders) => {
             for (let border of borders) {
                 if (!/^[A-Z]{3}$/.test(border)) {

@@ -1,5 +1,7 @@
 import express from 'express';
 import { validarPais } from "../validations/paisValidation.mjs";
+import { normalizarPais } from "../validations/paisParser.mjs";
+
 import {
     obtenerDashboardPais,
     agregarPaisController,
@@ -20,13 +22,13 @@ router.get("/verPaises", obtenerPaisesJSON);
 router.get('/pais', obtenerDashboardPais); // Renderiza dashboard con los datos
 
 router.get('/pais/agregar', mostrarFormularioAgregarController);
-router.post('/pais/agregar', validarPais, agregarPaisController);
+router.post('/pais/agregar', normalizarPais, validarPais, agregarPaisController);
 
 
 router.delete('/pais/:id', eliminarPaisController);
 
 router.get('/pais/editar/:id', mostrarFormularioEditarController);
-router.put('/pais/editar/:id', validarPais, editarPaisController);
+router.put('/pais/editar/:id', normalizarPais, validarPais, editarPaisController);
 
 
 export default router;

@@ -6,7 +6,8 @@ export async function obtenerDashboardPais(req, res) {
     try {
         const paises = await obtenerTodosLosPaises();
         res.render("dashboard", { 
-            titulo: "Lista de Paises", 
+            layout: 'layout',
+            title: "Lista de Paises", 
             paises 
         });
     } catch (error) {
@@ -32,14 +33,18 @@ export async function agregarPaisController(req, res) {
 
     try {
         const nuevoPais = await crearPais(req.body);
-        res.redirect("/api/pais"); //  Redirigir al dashboard después de crear
+        res.redirect("/api/pais");
     } catch (error) {
-        res.status(500).json({ mensaje: "Error al agregar el pais", error: error.message });
+        res.status(500).json({ mensaje: "Error al agregar el país", error: error.message });
     }
 }
 
 export function mostrarFormularioAgregarController(req, res) {
-    res.render('addPais'); // Sin lógica extra porque no cargás datos
+    res.render('addPais',{
+        layout: 'layout',
+        title: 'Agregar Pais'
+
+}); // Sin lógica extra porque no cargás datos
 }
 export async function eliminarPaisController(req, res) {
     try {
@@ -61,13 +66,29 @@ export async function mostrarFormularioEditarController(req, res) {
             return res.status(404).send('Pais no encontrado');
         }
 
-        res.render('editPais', { pais });
+        res.render('editPais', { 
+            layout: 'layout',
+            title: 'Editar Pais',
+            pais });
     } catch (error) {
         res.status(500).send('Error al obtener el pais');
     }
 }
 export async function editarPaisController(req, res) {
-    //  Verificar errores de validación antes de procesar la solicitud
+    if (req.body.capital && typeof req.body.capital === "string") {
+        req.body.capital = req.body.capital
+            .split(",")
+            .map(c => c.trim())
+            .filter(Boolean);
+    }
+
+    if (req.body.borders && typeof req.body.borders === "string") {
+        req.body.borders = req.body.borders
+            .split(",")
+            .map(b => b.trim())
+            .filter(Boolean);
+    }
+
     const errores = validationResult(req);
     if (!errores.isEmpty()) {
         return res.status(400).json({ errores: errores.array() });
@@ -83,7 +104,7 @@ export async function editarPaisController(req, res) {
             return res.status(404).send({ mensaje: "Pais no encontrado" });
         }
 
-        res.redirect('/api/pais'); //  Redirige al Dashboard tras editar
+        res.redirect('/api/pais');
     } catch (error) {
         res.status(500).send({ mensaje: "Error al actualizar el pais", error: error.message });
     }
