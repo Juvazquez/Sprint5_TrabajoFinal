@@ -2,9 +2,15 @@ import Pais from '../models/Pais.mjs';
 import IRepository from './IRepository.mjs';
 
 class PaisRepository extends IRepository {
-    async guardarPaises(paises) {
-        return await Pais.insertMany(paises);
+
+    async  guardarPais(pais) {
+        const nuevoPais = new PaisModel(pais);
+        return await nuevoPais.save();
     }
+    async existePais(nombreOficial) {
+        return await Pais.exists({ nombreOficial });
+    }
+
     async obtenerTodos() {
         return await Pais.find({ nombreOficial: { $exists: true } });
         //Busca en la colección solamente los documentos(paises) que tienen el campo nombreOficial.
@@ -13,6 +19,7 @@ class PaisRepository extends IRepository {
     async eliminarPais(id) {
         return await Pais.findByIdAndDelete(id);
     }
+    
     async obtenerPorId(id) {
         return await Pais.findById(id);
     }

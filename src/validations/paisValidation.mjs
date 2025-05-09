@@ -33,7 +33,7 @@ export const validarPais = [
         .notEmpty().withMessage("El área es obligatoria")
         .isFloat({ gt: 0 }).withMessage("El área debe ser un número positivo"),
 
-    body("population")
+    body("poblacion")
         .notEmpty().withMessage("La población es obligatoria")
         .isInt({ gt: 0 }).withMessage("La población debe ser un número entero positivo"),
 

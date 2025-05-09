@@ -10,7 +10,7 @@ export async function cargarPaises() {
     try {
         // 1. Consumir API
         const response = await axios.get(API_URL);
-        const paises = response.data;
+        const paises = response.data; // Estás extrayendo solo los datos útiles 
 
         // 2. Filtrar países que tengan idioma español
         const paisesEspanol = paises.filter(pais => 
@@ -38,7 +38,7 @@ export async function cargarPaises() {
             };
         });
 
-        // 4. Filtrar solo países válidos (opcionales si querés prevenir errores)
+        // 4. Filtrar solo países válidos para prevenir errores
         const paisesValidos = paisesProcesados.filter(p => 
             p.nombreComun && 
             p.nombreOficial && 
@@ -47,7 +47,12 @@ export async function cargarPaises() {
         );
 
         // 5. Guardar en la base de datos
-        await PaisRepository.guardarPaises(paisesValidos);
+        for (const pais of paisesValidos) {
+            const existe = await PaisRepository.existePais(pais.nombreOficial);
+            if (!existe) {
+                await PaisRepository.guardarPais(pais);
+            }
+        }
 
         console.log('Paises cargados correctamente en MongoDB');
 

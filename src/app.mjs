@@ -18,7 +18,7 @@ async function startServer() {
         await connectDB();
 
         //  Cargar los países UNA SOLA VEZ
-        await cargarPaises();
+        // await cargarPaises();
 
         // Middleware
         app.use(express.urlencoded({ extended: true }));

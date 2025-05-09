@@ -10,6 +10,8 @@ const paisSchema = new mongoose.Schema({
     },
     nombreOficial: { 
         type: String, 
+        unique: true,
+        index: true, 
         required: [true, "El nombre oficial del país es obligatorio"], 
         trim: true,
         minlength: [2, "El nombre oficial del país debe tener al menos 2 caracteres"],

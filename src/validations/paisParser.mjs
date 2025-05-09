@@ -3,7 +3,7 @@ export function normalizarPais(req, res, next) {
       req.body.capital = req.body.capital
         .split(",")
         .map(c => c.trim())
-        .filter(Boolean);
+        .filter(Boolean);//ver q pasa si no esta
     }
   
     if (typeof req.body.fronteras === "string") {
